@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import "../../styles/home.css";
-import { Link } from "react-router-dom";
 
-import { register } from "swiper/element/bundle";
-
-register();
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { Slider } from "../../components/sliders/slider";
 
 interface modelFilmes {
   id: number;
@@ -35,31 +28,7 @@ function Home() {
     loadFilmes();
   }, []);
 
-  return (
-    <div className="container">
-      <Swiper
-        slidesPerView={5}
-        pagination={{ clickable: true }}
-        navigation={true}
-        loop={true}
-        className="listMovies"
-      >
-        {filmes.map((filme) => {
-          return (
-            <SwiperSlide key={filme.id}>
-              <article>
-                <strong>{filme.title}</strong>
-                <img
-                  src={`https://image.tmdb.org/t/p/original/${filme.poster_path}`}
-                ></img>
-                <Link to={`filme/${filme.id}`}>Acessar</Link>
-              </article>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-    </div>
-  );
+  return <Slider filmes={filmes} />;
 }
 
 export default Home;
